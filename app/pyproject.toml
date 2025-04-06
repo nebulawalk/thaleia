@@ -9,6 +9,7 @@ dependencies = [
     "django-ninja>=1.4.0",
     "kaleido==0.2.0",
     "plotly>=6.0.1",
+    "psycopg2-binary>=2.9.10",
     "python-dotenv>=1.1.0",
     "uvicorn>=0.34.0",
     "weasyprint>=65.0",
@@ -16,5 +17,5 @@ dependencies = [
 
 [dependency-groups]
 dev = [
- "ruff>=0.11.4",
+    "ruff>=0.11.4"
 ]

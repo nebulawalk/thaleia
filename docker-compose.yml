@@ -1,8 +1,8 @@
 services:
   app:
     build:
-      context: .
-      dockerfile: docker/app/Dockerfile
+      context: app
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     environment:
@@ -10,3 +10,22 @@ services:
     volumes:
       - ./app:/app
     command: tail -f /dev/null
+  db:
+    build:
+      context: db
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./data/postgresql/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "app"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 5s

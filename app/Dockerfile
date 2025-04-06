@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-COPY app /app
+COPY . /app
 WORKDIR /app
 
 COPY --from=ghcr.io/astral-sh/uv:0.6.12 /uv /uvx /bin/

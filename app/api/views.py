@@ -1,5 +1,3 @@
-# api/views.py
-
 import base64
 from io import BytesIO
 
@@ -27,18 +25,17 @@ def generate_pdf(request: HttpRequest) -> HttpResponse:
         A response containing the generated PDF as its content.
 
     """
-    print(request, type(request))
-    # グラフ生成 Plotly
+    # グラフ生成
     fig = go.Figure(data=[go.Bar(y=[4, 1, 3])])
     img_bytes = pio.to_image(fig, format="png")
     img_base64 = base64.b64encode(img_bytes).decode("utf-8")
 
-    # HTML生成 WeasyPrintでPDF化
+    # PDF生成
     html = f"""
     <html>
       <body>
-        <h1>Thaleia レポート</h1>
-        <p>これは自動生成されたPDFです。</p>
+        <h1>Thaleia Report</h1>
+        <p>This is an auto-generated PDF.</p>
         <img src="data:image/png;base64,{img_base64}" />
       </body>
     </html>

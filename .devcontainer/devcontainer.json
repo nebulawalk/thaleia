@@ -1,0 +1,34 @@
+{
+    "name": "app",
+    "service": "app",
+    "dockerComposeFile": [
+        "../docker-compose.yml"
+    ],
+    "workspaceFolder": "/app",
+    "containerEnv": {
+        "UV_PROJECT_ENVIRONMENT": "/app/.venv"
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/app/.venv/bin/python"
+            },
+            "extensions": [
+                "ms-python.python",
+                "batisteo.vscode-django",
+                "charliermarsh.ruff",
+                "streetsidesoftware.code-spell-checker",
+                "tamasfe.even-better-toml",
+                "redhat.vscode-yaml",
+                "ms-azuretools.vscode-docker",
+                "oderwat.indent-rainbow",
+                "christian-kohler.path-intellisense",
+                "shardulm94.trailing-spaces",
+                "mosapride.zenkaku",
+                "aaron-bond.better-comments"
+            ]
+        }
+    },
+    "postCreateCommand": "uv sync --frozen",
+    "postStartCommand": "uv run uvicorn thaleia.asgi:application --host 0.0.0.0 --port 8000 --reload"
+}
